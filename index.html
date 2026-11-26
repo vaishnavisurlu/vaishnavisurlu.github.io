@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vaishnavi Surlu | Software Engineer</title>
+<meta name="description" content="Portfolio of Vaishnavi Surlu, a software engineer building Angular applications, Laravel and Statamic platforms, and custom Shopify storefronts.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F7FC;
+    --surface: #FFFFFF;
+    --ink: #1A1B33;
+    --muted: #5A5C7A;
+    --line: #DEDFEE;
+    --accent: #3A3FC4;
+    --gold: #FF8A4C;
+    --deep: #17183B;
+    --on-deep: #F0F0FA;
+    --chip: #ECECF9;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Hanken Grotesk", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0E0F26;
+      --surface: #17183B;
+      --ink: #ECECF8;
+      --muted: #A5A7C9;
+      --line: #2B2D5A;
+      --accent: #A9ACFF;
+      --chip: #1F2148;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+  .wrap { width: min(1040px, 100% - 32px); margin-inline: auto; }
+
+  /* Top bar */
+  .nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--deep) 92%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--on-deep);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .nav .brand { font-family: var(--display); font-weight: 700; text-decoration: none; }
+  .nav ul { display: flex; gap: 22px; list-style: none; margin: 0; padding: 0; }
+  .nav ul a { text-decoration: none; font-size: .95rem; opacity: .8; transition: opacity .2s; }
+  .nav ul a:hover { opacity: 1; color: var(--gold); }
+  @media (max-width: 640px) { .nav ul li:not(:last-child) { display: none; } }
+
+  /* Hero */
+  .hero {
+    background: var(--deep);
+    color: var(--on-deep);
+    position: relative;
+    overflow: hidden;
+    padding: clamp(64px, 12vw, 128px) 0 clamp(72px, 11vw, 120px);
+  }
+  .hero::before {
+    content: "";
+    position: absolute; inset: auto -10% -45% auto;
+    width: min(620px, 80vw); aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,138,76,.38), rgba(255,138,76,0) 65%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(3rem, 10vw, 7rem);
+    line-height: .95;
+    letter-spacing: -0.035em;
+    margin: 0 0 28px;
+  }
+  .hero .build {
+    font-family: var(--display);
+    font-size: clamp(1.3rem, 3.4vw, 2rem);
+    font-weight: 500;
+    margin: 0 0 12px;
+    display: flex; flex-wrap: wrap; gap: 0 .4em; align-items: baseline;
+  }
+  .rotator {
+    display: inline-grid;
+    color: var(--gold);
+    min-width: 11ch;
+  }
+  .rotator span { grid-area: 1 / 1; opacity: 0; transform: translateY(60%); }
+  .rotator span.on { opacity: 1; transform: none; }
+  .rotator span.in { animation: wordIn .5s cubic-bezier(.2,.7,.2,1) both; }
+  .rotator span.out { animation: wordOut .4s ease-in both; }
+  @keyframes wordIn { from { opacity: 0; transform: translateY(60%); } to { opacity: 1; transform: none; } }
+  @keyframes wordOut { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-60%); } }
+  .hero .meta { color: #B3B5D6; margin: 0 0 36px; max-width: 44ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; position: relative; }
+  .btn {
+    display: inline-block; padding: 12px 24px; border-radius: 999px;
+    font-weight: 600; text-decoration: none;
+    border: 2px solid var(--gold);
+    transition: transform .18s ease, background .18s ease, color .18s ease;
+  }
+  .btn.primary { background: var(--gold); color: var(--deep); }
+  .btn.ghost { color: var(--on-deep); }
+  .btn:hover { transform: translateY(-3px); }
+  .btn.ghost:hover { background: rgba(255,138,76,.16); }
+
+  /* Sections */
+  section.block { padding: clamp(48px, 8vw, 88px) 0; }
+  section.block + section.block { border-top: 1px solid var(--line); }
+  .block h2 {
+    font-family: var(--display); font-weight: 800;
+    font-size: clamp(1.9rem, 4.5vw, 2.8rem);
+    letter-spacing: -.02em; line-height: 1.1;
+    margin: 0 0 32px;
+  }
+  .block h2::after { content: ""; display: block; width: 56px; height: 4px; background: var(--gold); margin-top: 14px; border-radius: 2px; }
+
+  .about p { font-size: clamp(1.15rem, 2.2vw, 1.4rem); line-height: 1.55; max-width: 52ch; margin: 0 0 14px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .fact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+  .fact b { display: block; font-family: var(--display); font-size: 1.25rem; color: var(--accent); }
+  .fact span { color: var(--muted); font-size: .95rem; }
+
+  /* Skills */
+  .skill-groups { display: grid; gap: 22px; }
+  .skill-groups h3 { font-size: 1rem; margin: 0 0 10px; color: var(--muted); font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .chips li {
+    background: var(--chip); border: 1px solid var(--line); border-radius: 999px;
+    padding: 6px 14px; font-weight: 500; font-size: .98rem;
+    transition: transform .15s ease, border-color .15s ease, background .15s ease;
+  }
+  .chips li:hover { transform: translateY(-2px); border-color: var(--gold); background: var(--surface); }
+
+  /* Experience */
+  .role { border-left: 3px solid var(--gold); padding-left: 24px; position: relative; }
+  .role::before { content: ""; position: absolute; left: -9px; top: 6px; width: 15px; height: 15px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 5px var(--bg); }
+  .role h3 { font-family: var(--display); font-size: 1.4rem; margin: 0; }
+  .role .where { color: var(--muted); margin: 2px 0 16px; }
+  .role ul { margin: 0; padding-left: 1.2em; display: grid; gap: 10px; max-width: 68ch; }
+
+  /* Projects */
+  .grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 18px;
+    padding: 26px; display: flex; flex-direction: column; gap: 12px;
+    border-top: 4px solid var(--accent);
+    transition: transform .2s ease, box-shadow .2s ease, border-top-color .2s ease;
+  }
+  .card:hover { transform: translateY(-6px); border-top-color: var(--gold); box-shadow: 0 16px 32px -16px rgba(23,24,59,.35); }
+  .card h3 { font-family: var(--display); font-size: 1.3rem; line-height: 1.2; margin: 0; }
+  .card p { margin: 0; color: var(--muted); }
+  .card .chips { margin-top: auto; }
+  .card .chips li { font-size: .85rem; padding: 3px 10px; }
+
+  .edu h3 { font-family: var(--display); font-size: 1.3rem; margin: 0; }
+  .edu p { margin: 4px 0 0; color: var(--muted); }
+
+  /* Contact */
+  .contact { background: var(--deep); color: var(--on-deep); text-align: center; }
+  .contact h2 { margin-inline: auto; }
+  .contact h2::after { margin-inline: auto; }
+  .contact p { max-width: 46ch; margin: 0 auto 28px; color: #B3B5D6; }
+  .contact .actions { justify-content: center; }
+  .contact a.email { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(1.2rem, 4vw, 2rem); text-decoration: none; margin-bottom: 28px; overflow-wrap: anywhere; }
+  .contact a.email:hover { color: var(--gold); }
+  footer { background: var(--deep); color: #8486AC; text-align: center; padding: 0 0 32px; font-size: .92rem; }
+
+  /* Motion: only when allowed */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero .wrap > * { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+    .hero .wrap > :nth-child(2) { animation-delay: .1s; }
+    .hero .wrap > :nth-child(3) { animation-delay: .2s; }
+    .hero .wrap > :nth-child(4) { animation-delay: .3s; }
+    @keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+    .js .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+    .js .reveal.seen { opacity: 1; transform: none; }
+    .js .grid .reveal:nth-child(2) { transition-delay: .1s; }
+    .js .grid .reveal:nth-child(3) { transition-delay: .2s; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rotator span { transition: none; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="brand" href="#top">Vaishnavi Surlu</a>
+      <ul>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="wrap">
+      <h1>Vaishnavi<br>Surlu</h1>
+      <p class="build">I build
+        <span class="rotator" aria-live="off">
+          <span class="on">Angular apps</span>
+          <span>Laravel platforms</span>
+          <span>Shopify storefronts</span>
+        </span>
+      </p>
+      <p class="meta">Software engineer with 3+ years of client work, based in Kerala, India.</p>
+      <div class="actions">
+        <a class="btn primary" href="mailto:vaishnaviskotear@gmail.com">Email me</a>
+        <a class="btn ghost" href="https://github.com/vaishnavisurlu" rel="noopener">GitHub</a>
+        <a class="btn ghost" href="https://linkedin.com/in/vaishnavi-s-9b8939245" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+  </header>
+
+
+  <main>
+    <section class="block about" id="about">
+      <div class="wrap reveal">
+        <h2>About</h2>
+        <p>I build fast, responsive, mobile-friendly websites and web apps for clients, from Angular front ends to Laravel and Statamic CMS back ends and custom Shopify themes.</p>
+        <p>I check performance with Lighthouse, GTmetrix and JMeter, and work in agile teams using Git and CI/CD.</p>
+        <div class="facts">
+          <div class="fact"><b>3+ years</b><span>building for clients</span></div>
+          <div class="fact"><b>5+ stores</b><span>Shopify client stores</span></div>
+          <div class="fact"><b>Angular 19</b><span>with RxJS and NgRx</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="skills">
+      <div class="wrap reveal">
+        <h2>Skills</h2>
+        <div class="skill-groups">
+          <div><h3>Front-end</h3><ul class="chips"><li>Angular 19</li><li>RxJS</li><li>NgRx</li><li>TypeScript</li><li>JavaScript</li><li>HTML5</li><li>CSS3</li><li>Tailwind CSS</li><li>Bootstrap 5</li><li>Lazy loading</li><li>SSR</li></ul></div>
+          <div><h3>Back-end and CMS</h3><ul class="chips"><li>PHP</li><li>Laravel 8</li><li>Eloquent</li><li>Migrations</li><li>Queues</li><li>Authentication</li><li>Statamic CMS</li><li>REST APIs</li><li>MySQL</li></ul></div>
+          <div><h3>E-commerce</h3><ul class="chips"><li>Shopify Online Store 2.0</li><li>Liquid</li><li>Metafields</li><li>Metaobjects</li><li>Storefront API</li><li>Shopify Flow</li><li>Apps</li></ul></div>
+          <div><h3>Testing and performance</h3><ul class="chips"><li>Postman</li><li>Lighthouse</li><li>GTmetrix</li><li>JMeter</li></ul></div>
+          <div><h3>Tools</h3><ul class="chips"><li>Git</li><li>Git Bash</li><li>GitHub</li><li>SVN</li><li>WinSCP</li><li>CI/CD pipelines</li><li>Agile</li></ul></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="experience">
+      <div class="wrap reveal">
+        <h2>Experience</h2>
+        <div class="role">
+          <h3>Software Engineer</h3>
+          <p class="where">Bolas Intelli Solutions Pvt. Ltd., Mangalore, India. Aug 2023 to present.</p>
+          <ul>
+            <li>Built reusable Angular 19 components that reduced duplicated front-end code across web applications.</li>
+            <li>Managed state with RxJS and NgRx, including router state, server-side state and cross-tab synchronization.</li>
+            <li>Built custom Shopify themes and full websites in Liquid for 5+ client stores, with fast load times and better mobile usability.</li>
+            <li>Delivered modules on schedule for Laravel 8 and Statamic CMS platforms, and fixed bugs across all projects.</li>
+            <li>Deployed projects to servers with WinSCP and managed releases with Git, SVN and CI/CD pipelines.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="projects">
+      <div class="wrap">
+        <h2 class="reveal">Projects</h2>
+        <div class="grid">
+          <article class="card reveal">
+            <h3>Enterprise Angular Portal</h3>
+            <p>Modular views and interactive data components that make the portal easier to navigate.</p>
+            <ul class="chips"><li>Angular 19</li><li>RxJS</li><li>NgRx</li><li>SSR</li><li>REST APIs</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Statamic and Laravel content platforms</h3>
+            <p>Customized CMS setups so non-technical clients can manage multi-page content themselves.</p>
+            <ul class="chips"><li>Laravel 8</li><li>PHP</li><li>Statamic CMS</li><li>MySQL</li></ul>
+          </article>
+          <article class="card reveal">
+            <h3>Custom Shopify storefront suite</h3>
+            <p>Themes with dynamic product filtering, custom Liquid templates and mobile-first layouts.</p>
+            <ul class="chips"><li>Online Store 2.0</li><li>Liquid</li><li>Metaobjects</li><li>Storefront API</li></ul>
+          </article>
+        </div>
+        <!-- Client work: only add names or live links if your employer allows it. -->
+      </div>
+    </section>
+
+    <section class="block" id="education">
+      <div class="wrap reveal edu">
+        <h2>Education</h2>
+        <h3>Bachelor of Engineering, Computer Science</h3>
+        <p>Shree Devi Institute of Technology, India. 2023. First Class with Distinction, CGPA 8.64/10.</p>
+      </div>
+    </section>
+
+    <section class="block contact" id="contact">
+      <div class="wrap reveal">
+        <h2>Let's work together</h2>
+        <p>Open to Software Engineer roles, including in the UK.</p>
+        <a class="email" href="mailto:vaishnaviskotear@gmail.com">vaishnaviskotear@gmail.com</a>
+        <div class="actions">
+          <a class="btn primary" href="mailto:vaishnaviskotear@gmail.com">Email me</a>
+          <a class="btn ghost" href="https://github.com/vaishnavisurlu" rel="noopener">GitHub</a>
+          <a class="btn ghost" href="https://linkedin.com/in/vaishnavi-s-9b8939245" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Vaishnavi Surlu. Kerala, India.</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Rotating words in the hero
+  (function () {
+    var words = document.querySelectorAll('.rotator span');
+    if (reduce || words.length < 2) return;
+    var i = 0;
+    setInterval(function () {
+      var cur = words[i];
+      i = (i + 1) % words.length;
+      var next = words[i];
+      cur.className = 'out';
+      next.className = 'in on';
+      setTimeout(function () { cur.className = ''; }, 420);
+    }, 2400);
+  })();
+
+  // Reveal sections as they scroll into view
+  (function () {
+    var els = document.querySelectorAll('.reveal');
+    if (!('IntersectionObserver' in window) || reduce) {
+      els.forEach(function (e) { e.classList.add('seen'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('seen'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.12 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
+</body>
+</html>
